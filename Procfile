@@ -1,1 +1,1 @@
-web: gunicorn myEcommerce.wsgi
+web: gunicorn -b 0.0.0.0:8000 backend.myEcommerce.mainapp:application --log-file -
