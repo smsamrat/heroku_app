@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container bg-secondary text-white">
+    <div class="row">
+        <div class="col-md-6 my-4 px-5">
+            {% if user.profile_pic %}
+            <img src="/media/{{user.profile_pic.images}}" class="rounded-circle" width="100px" alt=""><br><br>
+            Username: {{user.profile.username}}<hr>
+            Full Name: {{user.profile.full_name}}<hr>
+            <a href="{% url 'edit_profile_picture' %}">
+                <button type="submit" class="btn btn-primary btn-sm">Edit Profile Picture</button>
+                </a><br>
+        {% else %}
+            <img src="/media/profile_pics/avatar.jpg" class="rounded-circle" width="100px" alt=""><br>
+            <a href="{% url 'add_profile_picture' %}">Add Profile Picture</a><br>
+        {% endif %}
+        </div>
+        <div class="col-md-6 my-4">
+            Address: {{user.profile.address_1}}
+            <hr>
+            City: {{user.profile.city}}
+            <hr>
+            Country: {{user.profile.country}}
+            <hr>
+            Zipcode: {{user.profile.zipcode}}
+            <hr>
+            Phone: {{user.profile.phone}}
+            <hr>
+            <a href="{% url 'change_profile' %}"><button type="submit" class="btn btn-primary btn-sm">Edit Profile</button></a>
+        </div>
+        
+    </div>
+</div>
+
+
+{% endblock content %}

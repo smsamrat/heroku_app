@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container bg-secondary text-white">
+    <div class="row">
+        <div class="col-md-12 p-5">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{form.username|as_crispy_field}}
+            </div>
+            <div class="form-group">
+                {{form.full_name|as_crispy_field}}
+            </div>
+            <div class="form-group">
+                {{form.address_1|as_crispy_field}}
+            </div>
+            <div class="form-group">
+                {{form.city|as_crispy_field}}
+            </div>
+            <div class="form-group">
+                {{form.country|as_crispy_field}}
+            </div>
+            <div class="form-group">
+                {{form.zipcode|as_crispy_field}}
+            </div>
+            <div class="form-group">
+                {{form.phone|as_crispy_field}}
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-sm">Update Profile</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

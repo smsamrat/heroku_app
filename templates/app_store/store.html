@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+</section> <!-- header-main .// -->
+
+
+
+
+</header> <!-- section-header.// -->
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+<div class="intro-banner-wrap">
+	<img src="{% static 'images/banners/1.jpg' %}" class="img-fluid rounded">
+</div>
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<header class="section-heading">
+	<!-- <a href="./store.html" class="btn btn-outline-primary float-right">See all</a> -->
+	<h3 class="section-title">Popular products</h3>
+</header><!-- sect-heading -->
+
+	
+<div class="row">
+	{% for product in object_list %}
+	<div class="col-md-3">
+		<div class="card card-product-grid">
+			<a href="{% url 'product_details' product.category.slug product.slug %}" class="img-wrap"> <img src="{{product.mainimage.url}}"> </a>
+			<figcaption class="info-wrap">
+				<a href="{% url 'product_details' product.category.slug product.slug %}" class="title">{{product.name}}</a>
+				<div class="price mt-1">&#2547;{{product.price}}
+					<span><del>&#2547;{{product.old_price}}</del></span>
+				</div> <!-- price-wrap.// -->
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	{% endfor%}
+</div> <!-- row.// -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+<!-- ========================= pagination  start// ========================= -->
+<ul class="pagination list-inline mx-auto justify-content-center fs-3 text-danger">
+    {% if object_list.has_previous %}
+      <li><a href="?page={{ object_list.previous_page_number }}" style="font-size: 25px;">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span style="font-size: 25px;">&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      <li class="page-item {% if i == page_number %} active {% endif %}">
+        <a class="page-link" href="?page={{i}}">{{i}}</a>
+      </li>
+    {% endfor %}
+  {% if object_list.has_next %}
+    <li><a href="?page={{ object_list.next_page_number }}" style="font-size: 25px;">&raquo;</a></li>
+  {% else %}
+    <li class="disabled"><span style="font-size: 25px;">&raquo;</span></li>
+  {% endif %}
+  </ul>
+
+
+
+  {% for page_number in object_list.adjusted_elided_pages %}
+  {% if page_number == object_list.paginator.ELLIPSIS %}
+      {{page_number}}
+  {% else %}
+      <a
+          href="{% url 'product' page_number %}"
+          class="{% if page_number == page_obj.number %}current{% endif %}"
+      >
+          {{page_number}}
+      </a>
+  {% endif %}
+{% endfor %}
+
+{% endblock content %}

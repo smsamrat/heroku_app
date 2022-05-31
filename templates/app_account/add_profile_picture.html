@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container  bg-secondary text-white p-5">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+    
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary btn-sm">Add Profile Pic</button>
+    </form>
+    <br><br>
+</div>
+{% endblock content %}
